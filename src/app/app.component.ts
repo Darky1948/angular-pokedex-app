@@ -11,6 +11,7 @@ export class AppComponent {
   name = signal('Pikachu');
   life = signal(21);
   size = computed(() => this.sizeOfPokemon());
+  imageSrc = signal('https://assets.pokemon.com/assets/cms2/img/pokedex/detail/025.png');
 
   constructor() {
     effect(() => {
