@@ -8,9 +8,9 @@ import { Component, computed, effect, signal } from '@angular/core';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  name = 'Pikachu';
+  name = signal('Pikachu');
   life = signal(21);
-  doubleLife = computed(() => this.life() * 2);
+  size = computed(() => this.sizeOfPokemon());
 
   constructor() {
     effect(() => {
@@ -25,5 +25,15 @@ export class AppComponent {
   decrementLife(): void {
     console.log("Decrement")
     this.life.update(n => n - 1);
+  }
+
+  sizeOfPokemon(): string {
+    if(this.life() <= 15) {
+      return "Petit";
+    } else if (this.life() >= 25) {
+      return "Grand";
+    } else {
+      return "Moyen";
+    }
   }
 }
