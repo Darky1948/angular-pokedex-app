@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, computed, signal } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -10,6 +10,7 @@ import { Component, signal } from '@angular/core';
 export class AppComponent {
   name = 'Pikachu';
   life = signal(21);
+  doubleLife = computed(() => this.life() * 2);
 
   incrementLife(): void {
     console.log("Increment")
