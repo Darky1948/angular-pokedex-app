@@ -26,6 +26,7 @@
          Taille : {{ sizeOfPokemon(pokemon) }}
         </h6>
         <p class="card-text">Points de vie : {{ pokemon.life }}</p>
+        <p class="card-text">{{ pokemon.created | date: "dd/MM/yyyy" }}</p>
         <div class="btn-group btn-group-sm" role="group">
          <button
           (click)="incrementLife(pokemon)"

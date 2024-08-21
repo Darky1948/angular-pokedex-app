@@ -2,11 +2,12 @@ import { Component, computed, effect, signal, WritableSignal } from '@angular/co
 import { Pokemon, PokemonList } from './pokemon.model';
 import { POKEMON_LIST } from './pokemon-list.fake';
 import { PokemonBorderDirective } from './pokemon-border.directive';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [PokemonBorderDirective],
+  imports: [PokemonBorderDirective, DatePipe],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
