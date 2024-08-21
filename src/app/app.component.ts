@@ -1,4 +1,6 @@
-import { Component, computed, effect, signal } from '@angular/core';
+import { Component, computed, effect, signal, WritableSignal } from '@angular/core';
+import { Pokemon, PokemonList } from './pokemon.model';
+import { POKEMON_LIST } from './pokemon-list.fake';
 
 @Component({
   selector: 'app-root',
@@ -8,30 +10,22 @@ import { Component, computed, effect, signal } from '@angular/core';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  name = signal('Pikachu');
-  life = signal(21);
-  size = computed(() => this.sizeOfPokemon());
-  imageSrc = signal('https://assets.pokemon.com/assets/cms2/img/pokedex/detail/025.png');
+  pokemons: WritableSignal<PokemonList> = signal(POKEMON_LIST);
 
-  constructor() {
-    effect(() => {
-      console.log('The life counter has been updated:', this.life());
-    })
-  }
-  incrementLife(): void {
+  incrementLife(pokemon: Pokemon): void {
     console.log("Increment")
-    this.life.update(n => n +1);
+    pokemon.life = pokemon.life + 1;
   }
 
-  decrementLife(): void {
+  decrementLife(pokemon: Pokemon): void {
     console.log("Decrement")
-    this.life.update(n => n - 1);
+    pokemon.life = pokemon.life - 1;
   }
 
-  sizeOfPokemon(): string {
-    if(this.life() <= 15) {
+  sizeOfPokemon(pokemon: Pokemon): string {
+    if(pokemon.life <= 15) {
       return "Petit";
-    } else if (this.life() >= 25) {
+    } else if (pokemon.life >= 25) {
       return "Grand";
     } else {
       return "Moyen";
