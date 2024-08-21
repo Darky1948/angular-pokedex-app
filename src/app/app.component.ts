@@ -3,11 +3,12 @@ import { Pokemon, PokemonList } from './pokemon.model';
 import { POKEMON_LIST } from './pokemon-list.fake';
 import { PokemonBorderDirective } from './pokemon-border.directive';
 import { DatePipe } from '@angular/common';
+import { ReversePipe } from './reverse.pipe';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [PokemonBorderDirective, DatePipe],
+  imports: [PokemonBorderDirective, DatePipe, ReversePipe],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
