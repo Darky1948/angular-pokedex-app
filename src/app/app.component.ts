@@ -1,4 +1,4 @@
-import { Component, computed, signal } from '@angular/core';
+import { Component, computed, effect, signal } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -12,6 +12,11 @@ export class AppComponent {
   life = signal(21);
   doubleLife = computed(() => this.life() * 2);
 
+  constructor() {
+    effect(() => {
+      console.log('The life counter has been updated:', this.life());
+    })
+  }
   incrementLife(): void {
     console.log("Increment")
     this.life.update(n => n +1);
