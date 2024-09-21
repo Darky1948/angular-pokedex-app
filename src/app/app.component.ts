@@ -10,7 +10,8 @@ import { PokemonService } from './pokemon.service';
   standalone: true,
   imports: [PokemonBorderDirective, DatePipe, ReversePipe],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.css',
+  providers: [PokemonService]
 })
 export class AppComponent {
   private readonly pokemonService = inject(PokemonService);
