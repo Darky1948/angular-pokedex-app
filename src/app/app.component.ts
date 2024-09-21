@@ -15,8 +15,11 @@ import { PokemonService } from './pokemon.service';
 })
 export class AppComponent {
   private readonly pokemonService = inject(PokemonService);
-
   pokemons: WritableSignal<PokemonList> = signal(this.pokemonService.getPokemonList());
+  readonly searchTerm = signal('');
+  readonly pokemonListFiltered = computed(() => {
+    return this.pokemons().filter((pokemon) => pokemon.name.toLowerCase().includes(this.searchTerm().trim().toLowerCase()));
+  });
 
   incrementLife(pokemon: Pokemon): void {
     console.log("Increment")
@@ -37,4 +40,5 @@ export class AppComponent {
       return "Moyen";
     }
   }
+
 }
