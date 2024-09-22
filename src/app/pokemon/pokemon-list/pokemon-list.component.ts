@@ -4,11 +4,15 @@ import { PokemonService } from '../../pokemon.service';
 import { PokemonBorderDirective } from '../../pokemon-border.directive';
 import { DatePipe } from '@angular/common';
 import { ReversePipe } from '../../reverse.pipe';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-pokemon-list',
   standalone: true,
-  imports: [PokemonBorderDirective, DatePipe, ReversePipe],
+  imports: [
+    PokemonBorderDirective, DatePipe, ReversePipe,
+    RouterLink
+  ],
   templateUrl: './pokemon-list.component.html',
   styles: ``,
   providers: [PokemonService]
