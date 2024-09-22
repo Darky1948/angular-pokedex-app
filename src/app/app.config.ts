@@ -6,10 +6,10 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 
 // Defining routes array
 const routes: Routes = [
-  { path: 'pokemons/:id', component: PokemonProfileComponent },
-  { path: 'pokemons', component: PokemonListComponent },
+  { path: 'pokemons/:id', component: PokemonProfileComponent, title: 'Pokémons' },
+  { path: 'pokemons', component: PokemonListComponent, title: 'Pokédex' },
   { path: '', redirectTo: '/pokemons', pathMatch: 'full' }, // Home default route that will redirect to /pokemons
-  { path: '**', component: PageNotFoundComponent },
+  { path: '**', component: PageNotFoundComponent, title: 'Page introuvable' },
 ];
 
 export const appConfig: ApplicationConfig = {
