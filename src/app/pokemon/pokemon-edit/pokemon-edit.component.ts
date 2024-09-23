@@ -24,4 +24,25 @@ export class PokemonEditComponent {
     damage: new FormControl(this.pokemon().damage),
     types: new FormArray(this.pokemon().types.map((type) => new FormControl(type))),
   });
+
+  // Get the selected pokemon list by user
+  get pokemonTypeList(): FormArray {
+    return this.form.get('types') as FormArray;
+  }
+
+  // Return if given type is already selected by user or not
+  isPokemonTypeSelected(type: string): boolean {
+    return !!this.pokemonTypeList.controls.find((control) => control.value === type);
+  }
+
+  // Add or remove a given type in the selected Pokemon list.
+  onPokemonTypeChange(type: string, isChecked: boolean): void {
+    if(isChecked) {
+      const control = new FormControl(type);
+      this.pokemonTypeList.push(control);
+    } else {
+      const index = this.pokemonTypeList.controls.map((control) => control.value).indexOf(type);
+      this.pokemonTypeList.removeAt(index);
+    }
+  }
 }
