@@ -3,6 +3,7 @@ import { Component, inject, signal } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { PokemonService } from '../../pokemon.service';
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { getPokemonColor } from '../../pokemon.model';
 
 @Component({
   selector: 'app-pokemon-edit',
@@ -44,5 +45,13 @@ export class PokemonEditComponent {
       const index = this.pokemonTypeList.controls.map((control) => control.value).indexOf(type);
       this.pokemonTypeList.removeAt(index);
     }
+  }
+
+  onSubmit() {
+    console.log(this.form.value);
+  }
+
+  getBadgeTypeColor(type: string): string {
+    return getPokemonColor(type);
   }
 }

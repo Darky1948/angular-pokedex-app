@@ -1,4 +1,4 @@
-<form [formGroup]="form">
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
   <div class="container mt-5">
     <div class="card">
       <div class="row g-0">
@@ -72,8 +72,10 @@
                           type="button"
                           class="btn btn-secondary btn-sm rounded-pill m-1"
                           (click)="pokemonTypeList.removeAt(index)"
+                          [style.backgroundColor]="getBadgeTypeColor(type.value)"
+                          [style.color]="type.value === 'Electrik' ? 'black' : 'white'"
                         >
-                          {{ type.value }} <span class="badge">x</span>
+                          {{ type.value }} <span class="badge" [style.color]="type.value === 'Electrik' ? 'black' : 'white'">x</span>
                         </button>
                         }
                       <div class="row mt-3">
