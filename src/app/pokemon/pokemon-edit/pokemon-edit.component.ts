@@ -18,6 +18,7 @@ export class PokemonEditComponent {
   readonly pokemonService = inject(PokemonService); // PokemonService to access to pokemon data
   readonly pokemonId = Number(this.route.snapshot.paramMap.get('id')); // Looking for pokemonId from the route.
   readonly pokemon = signal(this.pokemonService.getPokemonById(this.pokemonId)).asReadonly(); // Retrieving the pokemon according to its id.
+  readonly POKEMON_RULES = signal(POKEMON_RULES).asReadonly();
 
   readonly form = new FormGroup({
     name: new FormControl(this.pokemon().name, [
@@ -63,4 +64,19 @@ export class PokemonEditComponent {
   get pokemonName() {
     return this.form.get('name') as FormControl;
   }
+
+  get pokemonLife() {
+    return this.form.get('life') as FormControl;
+  }
+
+  incrementLife() {
+    const newValue = this.pokemonLife.value + 1;
+    this.pokemonLife.setValue(newValue);
+  }
+
+  decrementLife() {
+    const newValue = this.pokemonLife.value - 1;
+    this.pokemonLife.setValue(newValue);
+  }
+
 }
