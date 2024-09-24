@@ -79,4 +79,17 @@ export class PokemonEditComponent {
     this.pokemonLife.setValue(newValue);
   }
 
+  get pokemonDamage() {
+    return this.form.get('damage') as FormControl;
+  }
+
+  incrementDamage() {
+    const newValue = this.pokemonDamage.value + 1;
+    this.pokemonDamage.setValue(newValue);
+  }
+
+  decrementDamage() {
+    const newValue = this.pokemonDamage.value - 1;
+    this.pokemonDamage.setValue(newValue);
+  }
 }
