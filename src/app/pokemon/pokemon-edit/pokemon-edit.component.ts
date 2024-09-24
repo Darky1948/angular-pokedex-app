@@ -29,7 +29,10 @@ export class PokemonEditComponent {
     ]),
     life: new FormControl(this.pokemon().life),
     damage: new FormControl(this.pokemon().damage),
-    types: new FormArray(this.pokemon().types.map((type) => new FormControl(type))),
+    types: new FormArray(this.pokemon().types.map((type) => new FormControl(type)), [
+      Validators.required,
+      Validators.maxLength(POKEMON_RULES.MAX_TYPES)
+    ]),
   });
 
   // Get the selected pokemon list by user
