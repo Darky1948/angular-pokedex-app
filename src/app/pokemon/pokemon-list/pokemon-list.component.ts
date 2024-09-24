@@ -14,7 +14,12 @@ import { RouterLink } from '@angular/router';
     RouterLink
   ],
   templateUrl: './pokemon-list.component.html',
-  styles: ``,
+  styles: [
+    `.pokemon-card {
+      cursor: pointer;
+    }
+    `
+  ],
   providers: [PokemonService]
 })
 export class PokemonListComponent {
@@ -24,16 +29,6 @@ export class PokemonListComponent {
   readonly pokemonListFiltered = computed(() => {
     return this.pokemons().filter((pokemon) => pokemon.name.toLowerCase().includes(this.searchTerm().trim().toLowerCase()));
   });
-
-  incrementLife(pokemon: Pokemon): void {
-    console.log("Increment")
-    pokemon.life = pokemon.life + 1;
-  }
-
-  decrementLife(pokemon: Pokemon): void {
-    console.log("Decrement")
-    pokemon.life = pokemon.life - 1;
-  }
 
   sizeOfPokemon(pokemon: Pokemon): string {
     if(pokemon.life <= 15) {
