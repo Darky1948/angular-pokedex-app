@@ -1,8 +1,9 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { PokemonService } from '../../pokemon.service';
 import { DatePipe } from '@angular/common';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { catchError, map, of } from 'rxjs';
 
 @Component({
   selector: 'app-pokemon-profile',
@@ -16,5 +17,17 @@ export class PokemonProfileComponent {
   readonly route = inject(ActivatedRoute); // Service to access param of current route.
   readonly pokemonService = inject(PokemonService); // PokemonService to access to pokemon data
   readonly pokemonId = Number(this.route.snapshot.paramMap.get('id')); // Looking for pokemonId from the route.
-  readonly pokemon = toSignal(this.pokemonService.getPokemonById(this.pokemonId)); // Retrieving the pokemon according to its id.
+
+  readonly pokemonResponse = toSignal(
+    this.pokemonService.getPokemonById(this.pokemonId).pipe(
+      map((value) => ({ value, error: undefined })), catchError((error) => of({ value: undefined, error }))
+    )
+  ); // Retrieving the pokemon according to its id.
+
+  // En attente de la réponse HTTP
+  readonly loading = computed(() => !this.pokemonResponse());
+  // Cas erreur HTTP
+  readonly error = computed(() => this.pokemonResponse()?.error);
+  // Cas succès HTTP
+  readonly pokemon = computed(() => this.pokemonResponse()?.value);
 }
