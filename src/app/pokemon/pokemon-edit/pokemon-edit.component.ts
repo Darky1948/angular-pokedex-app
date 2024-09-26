@@ -1,9 +1,9 @@
 import { DatePipe, JsonPipe } from '@angular/common';
 import { Component, effect, inject, signal } from '@angular/core';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { PokemonService } from '../../pokemon.service';
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { getPokemonColor, POKEMON_RULES } from '../../pokemon.model';
+import { getPokemonColor, Pokemon, POKEMON_RULES } from '../../pokemon.model';
 import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
@@ -20,6 +20,7 @@ export class PokemonEditComponent {
   readonly pokemonId = Number(this.route.snapshot.paramMap.get('id')); // Looking for pokemonId from the route.
   readonly pokemon = toSignal(this.pokemonService.getPokemonById(this.pokemonId)); // Retrieving the pokemon according to its id.
   readonly POKEMON_RULES = signal(POKEMON_RULES).asReadonly();
+  readonly router = inject(Router);
 
   constructor() {
     effect(() => {
@@ -75,8 +76,23 @@ export class PokemonEditComponent {
     }
   }
 
-  onSubmit() {
-    console.log(this.form.value);
+  onSubmit(): void {
+    const isFormValid = this.form.valid;
+    const pokemon = this.pokemon();
+
+    if (isFormValid && pokemon) {
+      const updatedPokemon: Pokemon = {
+        ...pokemon,
+        name: this.pokemonName.value as string,
+        life: this.pokemonLife.value,
+        damage: this.pokemonDamage.value,
+        types: this.pokemonTypeList.value,
+      };
+
+      this.pokemonService.updatePokemon(updatedPokemon).subscribe(() => {
+        this.router.navigate(['/pokemons', this.pokemonId]);
+      });
+    }
   }
 
   getBadgeTypeColor(type: string): string {

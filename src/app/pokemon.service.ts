@@ -31,4 +31,13 @@ export class PokemonService {
       'Vol',
     ];
   }
+
+  // Met à jour un pokémon existant.
+  updatePokemon(pokemon: Pokemon): Observable<Pokemon> {
+    return this.http.put<Pokemon>(`${this.POKEMON_API_URL}/${pokemon.id}`, pokemon);
+  }
+
+  deletePokemon(pokemonId: number): Observable<void> {
+    return this.http.delete<void>(`${this.POKEMON_API_URL}/${pokemonId}`);
+  }
 }

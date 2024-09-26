@@ -33,8 +33,11 @@
               </tbody>
               <div class="d-flex justify-content-between mt-4">
                 <button class="btn btn-link text-decoration-none text-warning" routerLink="/pokemons">RETOUR</button>
-                <button class="btn btn-link text-decoration-none text-warning">EDITER</button>
-                <button class="btn btn-link text-decoration-none text-warning">SUPPRIMER</button>
+                <button class="btn btn-link text-decoration-none text-warning" [routerLink]="['/pokemons/edit', pokemon.id]">
+                  EDITER
+                </button>
+                <button class="btn btn-link text-decoration-none text-warning"
+                (click)="deletePokemon(pokemon.id)">SUPPRIMER</button>
               </div>
             </table>
           </div>
