@@ -7,6 +7,7 @@ import { PokemonEditComponent } from './pokemon/pokemon-edit/pokemon-edit.compon
 import { provideHttpClient } from '@angular/common/http';
 import { AuthGuard } from '../core/auth/auth.guard';
 import { LoginComponent } from './login/login.component';
+import { PokemonAddComponent } from './pokemon/pokemon-add/pokemon-add.component';
 
 // Defining routes array
 const routes: Routes = [
@@ -24,6 +25,11 @@ const routes: Routes = [
         component: PokemonListComponent,
         title: 'Pokédex',
 
+      },
+      {
+        path: 'add',
+        component: PokemonAddComponent,
+        title: 'Pokémon'
       },
       {
         path: 'edit/:id',

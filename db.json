@@ -130,6 +130,18 @@
         "Feu"
       ],
       "created": "2024-08-16T00:00:00Z"
+    },
+    {
+      "name": "Pokéball",
+      "picture": "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.pokepedia.fr%2FPok%25C3%25A9_Ball&psig=AOvVaw2wfvjANnTkmPy65PZItio6&ust=1727434438876000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCNiKnvO44IgDFQAAAAAdAAAAABAE",
+      "life": 13,
+      "damage": 2,
+      "types": [
+        "Feu",
+        "Plante"
+      ],
+      "created": "2024-09-26T10:54:09.403Z",
+      "id": 13
     }
   ]
 }
