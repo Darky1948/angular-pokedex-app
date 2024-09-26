@@ -21,7 +21,7 @@
       "id": 2,
       "name": "Salamèche",
       "life": 28,
-      "damage": 6,
+      "damage": 7,
       "picture": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/004.png",
       "types": [
         "Feu"

@@ -5,12 +5,32 @@ import { PokemonProfileComponent } from './pokemon/pokemon-profile/pokemon-profi
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { PokemonEditComponent } from './pokemon/pokemon-edit/pokemon-edit.component';
 import { provideHttpClient } from '@angular/common/http';
+import { AuthGuard } from '../core/auth/auth.guard';
 
 // Defining routes array
 const routes: Routes = [
-  {path: 'pokemons/edit/:id', component: PokemonEditComponent, title: 'Pokémon édition'},
-  { path: 'pokemons/:id', component: PokemonProfileComponent, title: 'Pokémons' },
-  { path: 'pokemons', component: PokemonListComponent, title: 'Pokédex' },
+  {
+    path: 'pokemons',
+    canActivateChild: [AuthGuard],
+    children: [
+      {
+        path: '',
+        component: PokemonListComponent,
+        title: 'Pokédex',
+
+      },
+      {
+        path: 'edit/:id',
+        component: PokemonEditComponent,
+        title: 'Pokémon',
+      },
+      {
+        path: ':id',
+        component: PokemonProfileComponent,
+        title: 'Pokémon',
+      },
+    ],
+  },
   { path: '', redirectTo: '/pokemons', pathMatch: 'full' }, // Home default route that will redirect to /pokemons
   { path: '**', component: PageNotFoundComponent, title: 'Page introuvable' },
 ];
