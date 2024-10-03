@@ -12,7 +12,6 @@ import { toSignal } from '@angular/core/rxjs-interop';
   imports: [RouterLink, DatePipe, ReactiveFormsModule, JsonPipe],
   templateUrl: './pokemon-edit.component.html',
   styles: ``,
-  providers: [PokemonService]
 })
 export class PokemonEditComponent {
   readonly route = inject(ActivatedRoute); // Service to access param of current route.

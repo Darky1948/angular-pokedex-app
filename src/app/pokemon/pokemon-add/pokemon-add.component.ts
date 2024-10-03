@@ -10,7 +10,6 @@ import { Router, RouterLink } from '@angular/router';
   imports: [ReactiveFormsModule, RouterLink],
   templateUrl: './pokemon-add.component.html',
   styles: ``,
-  providers: [PokemonService]
 })
 export class PokemonAddComponent {
   readonly pokemonService = inject(PokemonService); // PokemonService to access to pokemon data

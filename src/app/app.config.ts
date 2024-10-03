@@ -8,6 +8,10 @@ import { provideHttpClient } from '@angular/common/http';
 import { AuthGuard } from '../core/auth/auth.guard';
 import { LoginComponent } from './login/login.component';
 import { PokemonAddComponent } from './pokemon/pokemon-add/pokemon-add.component';
+import { PokemonService } from './pokemon.service';
+import { environment } from '../environments/environment';
+import { PokemonLocalStorageService } from './pokemon-local-storage.service';
+import { PokemonJSONServerService } from './pokemon-json-server.service';
 
 // Defining routes array
 const routes: Routes = [
@@ -47,10 +51,21 @@ const routes: Routes = [
   { path: '**', component: PageNotFoundComponent, title: 'Page introuvable' },
 ];
 
+// Depending on the environment we either use json local mock server or localstorage on production
+function pokemonServiceFactory(): PokemonService {
+  return environment.production
+    ? new PokemonLocalStorageService()
+    : new PokemonJSONServerService();
+}
+
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes), // Thanks to provideRouter will tell to angular what are the defined routes.
     provideHttpClient(),
+    {
+      provide: PokemonService,
+      useFactory: pokemonServiceFactory,
+    }
   ],
 };

@@ -11,7 +11,6 @@ import { catchError, map, of } from 'rxjs';
   imports: [DatePipe, RouterLink],
   templateUrl: './pokemon-profile.component.html',
   styles: ``,
-  providers: [PokemonService],
 })
 export class PokemonProfileComponent {
   readonly route = inject(ActivatedRoute); // Service to access param of current route.

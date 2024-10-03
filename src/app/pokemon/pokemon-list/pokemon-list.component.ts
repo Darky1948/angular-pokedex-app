@@ -21,7 +21,6 @@ import { toSignal } from '@angular/core/rxjs-interop';
     }
     `
   ],
-  providers: [PokemonService]
 })
 export class PokemonListComponent {
   private readonly pokemonService = inject(PokemonService);
